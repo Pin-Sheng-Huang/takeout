@@ -1,6 +1,6 @@
 server:
   port: 8080
-
+#http://localhost:8888/#/login (在nginx配置8888)
 spring:
   profiles:
     active: dev
@@ -21,7 +21,7 @@ spring:
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.sky.entity
+  type-aliases-package: com.sky.entity #整體掃描了包
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true

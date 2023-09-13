@@ -81,14 +81,17 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    /**
+     * 扩展mvc筐架的肖息转换器
+     * * * */
     protected void extendMessageConverters(List<HttpMessageConverter<?>>converters){
-        log.info("starting message transformation....");
+        log.info("starting message transformation....(扩展消息转换器)");
         //创建一个消息转换对象
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         //设置对象转换器，将java对象转化为json
         converter.setObjectMapper(new JacksonObjectMapper());
 
-        //将转换器加入到mvc框架容器里面
+        //将转换器加入到mvc框架容器里面,加上0 可以优先使用
         converters.add(0,converter);
     }
 

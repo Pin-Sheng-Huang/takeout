@@ -24,7 +24,8 @@ public class OrderTask {
     /**
      * 处理支付超时订单
      */
-    @Scheduled(cron = "0 * * * * ?")
+    //@Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 1 0 * * ?")/*改为每天凌晨 00:01 执行*/
     public void processTimeoutOrder(){
         log.info("处理支付超时订单：{}", new Date());
 

@@ -13,7 +13,9 @@
 
  Date: 03/05/2023 12:11:49
 */
+CREATE database sky_take_out;
 
+use sky_take_out;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

@@ -69,8 +69,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void save(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();    //属性拷贝
-        BeanUtils.copyProperties(employeeDTO, employee);
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);//属性拷贝
         //账号状态默认为1，正常状态
         employee.setStatus(StatusConstant.ENABLE);   //默认密码为123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));    //创建人、创建时间、修改人、修改时间
@@ -87,10 +87,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         Page<Employee> page=employeeMapper.pageQuery(employeePageQueryDTO);
         return new PageResult(page.getTotal(),page.getResult());
     }
-
+/**
+ * 啟用禁用員工帳號
+ * * * */
     @Override
     public void startOrStop(Integer status, Long id) {
-        Employee employee=Employee.builder()
+        Employee employee=Employee.builder() //使永builder構建器對象設置屬性
                         .id(id)
                 .status(status)
                         .build();
