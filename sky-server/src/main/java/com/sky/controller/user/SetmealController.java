@@ -30,6 +30,7 @@ public class SetmealController {
      */
     @GetMapping("/list")
     @ApiOperation("根据分类id查询套餐")
+    //在方法執行錢先查詢緩存中是否有數據,如果有數據,則直接返回緩存數據,如果沒有緩存數據,調用方法江方法返回值放到緩存中
     @Cacheable(cacheNames = "setmealCache",key = "#categoryId")
     public Result<List<Setmeal>> list(Long categoryId) {
         Setmeal setmeal = new Setmeal();

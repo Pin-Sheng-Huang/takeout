@@ -52,7 +52,7 @@ public class DishServiceImpl implements DishService {
         BeanUtils.copyProperties(dishDTO,dish);
 
         dishMapper.insert(dish);
-        //获取id
+        //获取insert 語句生成的主健id值
         Long id = dish.getId();
         List<DishFlavor> flavors = dishDTO.getFlavors();
         if (flavors!=null && flavors.size()>0){
@@ -76,7 +76,7 @@ public class DishServiceImpl implements DishService {
      * 批量删除菜品
      * @param ids
      */
-    @Transactional
+    @Transactional /*保證代碼一致性*/
     @Override
     public void delete(List<Long> ids) {
         //是否起售，起售（status==1）不可删除

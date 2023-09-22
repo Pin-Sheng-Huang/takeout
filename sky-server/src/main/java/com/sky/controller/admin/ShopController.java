@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("adminShopController")
+@RestController("adminShopController") //指定Bean的名称
 @RequestMapping("/admin/shop")
 @Api(tags = "店铺相关接口")
 @Slf4j
@@ -36,7 +36,7 @@ public class ShopController {
     @GetMapping("/status")
     @ApiOperation("获取店铺的营业状态")
     public Result<Integer> getStatus(){
-        Integer status = (Integer) redisTemplate.opsForValue().get(KEY);
+        Integer status = (Integer) redisTemplate.opsForValue().get(KEY); //字符串强转 integer
         log.info("获取到店铺的营业状态为：{}",status == 1 ? "营业中" : "打烊中");
         return Result.success(status);
     }

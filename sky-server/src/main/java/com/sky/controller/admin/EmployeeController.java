@@ -120,6 +120,7 @@ public class EmployeeController {
     /**
      * 根据id查询员工
      * 回显
+     * @PathVariable 放路径参数
      * @param id
      * @return
      */

@@ -92,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
  * * * */
     @Override
     public void startOrStop(Integer status, Long id) {
-        Employee employee=Employee.builder() //使永builder構建器對象設置屬性
+        Employee employee=Employee.builder() //使用builder構建器對象設置屬性
                         .id(id)
                 .status(status)
                         .build();
@@ -102,7 +102,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getById(Long id) {
         Employee employee=employeeMapper.getById(id);
-        employee.setPassword("****");//非明文展示
+        String password  = employee.getPassword();
+        int passwordlength = password.length();
+        StringBuilder repeatpass = new StringBuilder();
+        for (int i = 0; i < passwordlength; i++) {
+            repeatpass.append("*");
+        }
+        employee.setPassword(repeatpass.toString());//非明文展示
         return employee;
     }
 

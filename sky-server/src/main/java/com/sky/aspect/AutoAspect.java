@@ -30,10 +30,11 @@ public class AutoAspect {
     public void autoFill(JoinPoint joinPoint) {
         log.info("开始填充公共字段");
         String name = joinPoint.getSignature().getName();
-
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);
-        OperationType operationType = autoFill.value();
+        //獲取當前被攔截的方法上的數據庫操作類型
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();//方法簽名對象
+        AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);//獲得方法上的註解對象
+        OperationType operationType = autoFill.value();//獲得數據庫操作類型
+        //獲得當前被攔截的方法的參數--實體對象
         Object[] args = joinPoint.getArgs();
         if (args == null || args.length == 0) return;
         Object entity = args[0];
@@ -41,7 +42,7 @@ public class AutoAspect {
         //初始数据准备
         LocalDateTime now = LocalDateTime.now();
         Long currentId = BaseContext.getCurrentId();
-
+        //根據當前不同的操作類型,位對應的屬性通過反射來賦值
         if (operationType == OperationType.INSERT) {
             //if (name.contains("insert")) {
             try {

@@ -24,6 +24,7 @@
     </sql>
 
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.sky.entity.Dish" useGeneratedKeys="true">
+<!--keyProperty自增的id會賦給dish類別id屬性  ,useGeneratedKeysg是否要主健-->
         insert into dish
         (name,category_id
         ,price,image,description

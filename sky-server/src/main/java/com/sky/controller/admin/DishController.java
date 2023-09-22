@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜品管理
@@ -38,6 +39,10 @@ public class DishController {
     public Result save (@RequestBody DishDTO dishDTO){
         log.info("新增菜品{}",dishDTO);
         dishService.save(dishDTO);
+        //清缓存数据
+        String key ="dish_" + dishDTO.getCategoryId();
+        redisTemplate.delete(key);
+
         return Result.success();
     }
 
@@ -65,7 +70,12 @@ public class DishController {
     public Result delete(@RequestParam List<Long> ids){
         log.info("菜品批量删除：{}", ids);
         dishService.delete(ids);
-        return Result.success();
+
+        //将缓存清除
+        Set keys = redisTemplate.keys("dish_*"); //dish_* 把关于dish_ 开头的都察出来
+        redisTemplate.delete(keys);
+
+        return Result.success("删除成功");
     }
 
     /**

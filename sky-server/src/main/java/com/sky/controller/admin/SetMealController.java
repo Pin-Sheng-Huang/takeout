@@ -33,6 +33,7 @@ public class SetMealController {
     }
 
     @ApiOperation("新增套餐")
+    //將一條或多條數據從緩存中刪除
     @CacheEvict(cacheNames = "setmealCache",key = "#setmealDTO.categoryId")
     @PostMapping
     public Result saveSetMeal(@RequestBody SetmealDTO setmealDTO){
