@@ -1,4 +1,11 @@
 [//swagger接口文挡访问 :http://localhost:8080/doc.html#/home]
+#前端访问:listen       8991;
+EX:http://localhost:8991/#/dashboard
+#负载均衡器 指定服务器
+upstream webservers{
+	  server 127.0.0.1:8080 weight=90 ;
+	  #server 127.0.0.1:8088 weight=10 ;
+	}
 ## 快速搭建项目：
 启动nginx ，nginx要放在无中文目录下
 
