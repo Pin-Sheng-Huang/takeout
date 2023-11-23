@@ -1,3 +1,4 @@
+[//swagger接口文挡访问 :http://localhost:8080/doc.html#/home]
 ## 快速搭建项目：
 启动nginx ，nginx要放在无中文目录下
 
